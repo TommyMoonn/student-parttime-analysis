@@ -14,16 +14,16 @@ of 2 populations.
 
 ## 📁 Project Structure
 ```md
-StudentPartTimeAnalysis/
-├── student_analysis.py # Main analysis script
-├── data/ # Data folder
-│ └── student_data.csv # Dataset
-├── images/ # Graphs generated from the program
-│ ├── student_work_analysis.png
-│ ├── student_work_detailed_analysis.png
-│ └── hypothesis_tests_visualization.png
-├── requirements.txt # Project dependencies
-└── README.md # Project documentation
+📁 StudentPartTimeAnalysis/
+├── 📄 student_analysis.py # Main analysis script
+├── 📁 data/ # Data folder
+│ └── 📄 student_data.csv # Dataset
+├── 📁 images/ # Graphs generated from the program
+│ ├── 📊 student_work_analysis.png
+│ ├── 📊 student_work_detailed_analysis.png
+│ └── 📊 hypothesis_tests_visualization.png
+├── 📄 requirements.txt # Project dependencies
+└── 📄 README.md # Project documentation
 ```
 
 ## ⚙️ Installation & Setup  
