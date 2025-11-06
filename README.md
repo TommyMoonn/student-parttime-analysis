@@ -17,7 +17,7 @@ of 2 populations.
 StudentPartTimeAnalysis/
 ┣ 📄 student_analysis.py # Main analysis script
 ┣ 📄 student_data.csv # Dataset
-┣ 📁 student_work_analysis.png # Combined visualization output
+┣ 📁 images # Graphs generated from the program
 ┣ 📄 requirements.txt # Project dependencies
 ┗ 📄 README.md # This file
 ```
