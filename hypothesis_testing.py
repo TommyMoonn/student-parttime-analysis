@@ -254,10 +254,10 @@ print(f"                (Working - Non-Working) lies between {ci_lower_diff_prop
 # Generate visualization for the hypothesis tests
 print("\nGenerating visualization plots...")
 
-fig = plt.figure(figsize=(16, 10))
+fig = plt.figure(figsize=(14, 10))
 
 # 1. Test for Population Mean (t-distribution)
-ax1 = plt.subplot(2, 3, 1)
+ax1 = plt.subplot(2, 2, 1)
 x = np.linspace(-4, 4, 1000)
 y = t.pdf(x, df_test)
 ax1.plot(x, y, 'b-', linewidth=2, label='t-distribution')
@@ -273,7 +273,7 @@ ax1.legend()
 ax1.grid(alpha=0.3)
 
 # 2. Test for Proportion (z-distribution)
-ax2 = plt.subplot(2, 3, 2)
+ax2 = plt.subplot(2, 2, 2)
 x = np.linspace(-4, 4, 1000)
 y = norm.pdf(x)
 ax2.plot(x, y, 'b-', linewidth=2, label='Normal distribution')
@@ -289,7 +289,7 @@ ax2.legend()
 ax2.grid(alpha=0.3)
 
 # 3. Test for Difference in Means
-ax3 = plt.subplot(2, 3, 3)
+ax3 = plt.subplot(2, 2, 3)
 x = np.linspace(-4, 4, 1000)
 y = t.pdf(x, df_diff)
 ax3.plot(x, y, 'b-', linewidth=2, label='t-distribution')
@@ -304,47 +304,29 @@ ax3.set_ylabel('Probability Density')
 ax3.legend()
 ax3.grid(alpha=0.3)
 
-# 4. Confidence Interval for Mean
-ax4 = plt.subplot(2, 3, 4)
-ax4.errorbar([0], [mean_all], yerr=[[mean_all - ci_lower], [ci_upper - mean_all]],
-             fmt='o', markersize=10, capsize=10, capthick=2, color='blue', linewidth=2)
-ax4.axhline(mu_0, color='red', linestyle='--', linewidth=2, label=f'H0: μ = {mu_0}')
-ax4.set_xlim(-0.5, 0.5)
-ax4.set_ylim(mean_all - 0.5, mean_all + 0.5)
-ax4.set_xticks([])
-ax4.set_ylabel('GPA')
-ax4.set_title(f'{int((1-alpha)*100)}% CI for Population Mean\n({ci_lower:.3f}, {ci_upper:.3f})', fontweight='bold')
+# 4. Test for Difference in Proportions
+ax4 = plt.subplot(2, 2, 4)
+x = np.linspace(-4, 4, 1000)
+y = norm.pdf(x)
+ax4.plot(x, y, 'b-', linewidth=2, label='Normal distribution')
+ax4.axvline(z_stat_prop, color='red', linestyle='--', linewidth=2, label=f'z-stat = {z_stat_prop:.3f}')
+ax4.axvline(-z_critical, color='green', linestyle='--', linewidth=1.5, label=f'Critical = ±{z_critical:.3f}')
+ax4.axvline(z_critical, color='green', linestyle='--', linewidth=1.5)
+ax4.fill_between(x[x < -z_critical], 0, norm.pdf(x[x < -z_critical]), alpha=0.3, color='red')
+ax4.fill_between(x[x > z_critical], 0, norm.pdf(x[x > z_critical]), alpha=0.3, color='red')
+ax4.set_title('Test for Difference in Proportions\n(Req 5)', fontweight='bold')
+ax4.set_xlabel('z-value')
+ax4.set_ylabel('Probability Density')
 ax4.legend()
-ax4.grid(axis='y', alpha=0.3)
+ax4.grid(alpha=0.3)
 
-# 5. Confidence Interval for Difference in Means
-ax5 = plt.subplot(2, 3, 5)
-means = [mean1, mean2]
-labels = ['Working', 'Not Working']
-colors = ['#ef4444', '#10b981']
-bars = ax5.bar(labels, means, color=colors, alpha=0.7, edgecolor='black', linewidth=2)
-ax5.errorbar(labels, means, yerr=[std1/np.sqrt(n1), std2/np.sqrt(n2)],
-             fmt='none', capsize=10, capthick=2, color='black', linewidth=2)
-ax5.set_ylabel('Mean GPA')
-ax5.set_title('Mean GPA Comparison with Error Bars', fontweight='bold')
-ax5.grid(axis='y', alpha=0.3)
-
-# 6. Proportions Comparison
-ax6 = plt.subplot(2, 3, 6)
-props = [p1_hat, p2_hat]
-bars = ax6.bar(labels, props, color=colors, alpha=0.7, edgecolor='black', linewidth=2)
-ax6.errorbar(labels, props, yerr=[se_diff_prop_ci, se_diff_prop_ci],
-             fmt='none', capsize=10, capthick=2, color='black', linewidth=2)
-ax6.set_ylabel('Proportion (GPA ≥ 3.0)')
-ax6.set_title('Proportion Comparison with Error Bars', fontweight='bold')
-ax6.set_ylim(0, 1)
-ax6.grid(axis='y', alpha=0.3)
-
-plt.tight_layout()
-plt.show()
+plt.tight_layout(pad=3.0)
+plt.suptitle("Hypothesis Test Visualizations", fontsize=16, fontweight='bold', y=1.02)
+plt.subplots_adjust(top=0.9)
 plt.savefig('images/hypothesis_tests_visualization.png', dpi=300, bbox_inches='tight')
 print("\nVisualization saved as 'hypothesis_tests_visualization.png'")
 
+plt.show()
 # SUMMARY TABLE
 print("\n" + "="*90)
 print("SUMMARY OF ALL HYPOTHESIS TESTS")
