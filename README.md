@@ -15,7 +15,8 @@ of 2 populations.
 ## 📁 Project Structure
 ```md
 📁 StudentPartTimeAnalysis/
-├── 📄 student_analysis.py # Main analysis script
+├── 📄 descriptive_stats.py # Analysis
+├── 📄 hypothesis_testing.py # Hypothesis tests
 ├── 📁 data/ # Data folder
 │ └── 📄 data.csv # Dataset
 ├── 📁 images/ # Graphs generated from the program
